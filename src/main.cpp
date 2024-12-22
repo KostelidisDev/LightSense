@@ -33,7 +33,7 @@
 #endif
 
 #ifndef HTTP_DOMAIN
-#define HTTP_DOMAIN "NodeSense-DEV"
+#define HTTP_DOMAIN "LightSense-DEV"
 #endif
 
 #ifndef HTTP_PORT
@@ -49,7 +49,11 @@
 #endif
 
 #ifndef SENSOR_TYPE
-#define SENSOR_TYPE "Template"
+#define SENSOR_TYPE "Light"
+#endif
+
+#ifndef LIGHT_SENSOR_PIN
+#define LIGHT_SENSOR_PIN A0
 #endif
 
 auto DEVICE_SERIAL_BAUD = MONITOR_BAUD;
@@ -67,6 +71,8 @@ void handleNotFound();
 void setup()
 {
     Serial.begin(DEVICE_SERIAL_BAUD);
+
+    pinMode(LIGHT_SENSOR_PIN, INPUT);
 
     Serial.println("");
     Serial.println(WIFI_SSID_NAME);
@@ -102,6 +108,8 @@ void loop()
 {
     server.handleClient();
     MDNS.update();
+
+
 }
 
 void handleStatus()
@@ -123,12 +131,14 @@ void handleStatus()
 
 void handleData()
 {
+    const int sensorRaw = analogRead(LIGHT_SENSOR_PIN);
+
     JSONVar json;
 
     json["message"] = "OK";
     json["status"] = "200";
 
-    json["raw"] = nullptr;
+    json["raw"] = sensorRaw;
 
     json["processed"] = nullptr;
 
