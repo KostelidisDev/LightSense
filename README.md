@@ -1,7 +1,6 @@
-# NodeSense
+# LightSense
 
-A template project designed for IoT applications using NodeMCU. It provides a modular and reusable base for integrating sensors and devices, making it easier to kickstart IoT projects.
-
+LightSense is an IoT project built on the NodeSense framework, featuring a light sensor for monitoring ambient light levels.
 # License
 
 [MIT License](./LICENSE)
