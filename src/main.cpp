@@ -124,8 +124,6 @@ void loop()
 {
     server.handleClient();
     MDNS.update();
-
-
 }
 
 void printPlatformInfo()
